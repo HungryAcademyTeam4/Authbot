@@ -1,5 +1,6 @@
-PATH
-  remote: /Users/jacquelinechenault/Dropbox/Hungry Academy/Projects/chatlocker/sinatra-google-auth
+GIT
+  remote: git@github.com:HungryAcademyTeam4/sinatra-google-auth.git
+  revision: 55af0a51f95c7d9517f89039944b1232cc20f80f
   specs:
     sinatra-google-auth (0.0.5)
       omniauth-openid
