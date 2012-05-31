@@ -21,6 +21,7 @@ namespace :deploy do
   end
   task :start do
     bundle_install
+    run "cd /home/apps/#{application}/current && bundle exec rake db:migrate"
     run "cd /home/apps/#{application}/current && bundle exec ruby ./authbot.rb -p 4568"
   end
 end
