@@ -19,17 +19,17 @@ get '/' do
   authenticate
 
   user_info  = JSON.parse(session["user_info"])
+
   email      = user_info["email"]
   first_name = user_info["first_name"]
   last_name  = user_info["last_name"]
 
   email_domain = email.split("@")[1]
-  valid_email_domains = ['hungryacademy.org', 'livingsocial.com']
+  valid_email_domains = ['hungrymachine.com', 'livingsocial.com']
 
   user = User.find_by_email(user_info["email"])
-
   if valid_email_domains.include?(email_domain)
-    unless user
+    if user.nil?
       User.create(first_name: first_name,
                   last_name: last_name,
                   email: email)
