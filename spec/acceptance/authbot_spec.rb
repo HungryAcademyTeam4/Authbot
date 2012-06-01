@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/../authbot'
+require 'spec/helper'
 
 set :environment, :test
 Test::Unit::TestCase.send :include, Rack::Test::Methods
