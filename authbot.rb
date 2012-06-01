@@ -31,8 +31,8 @@ get '/' do
   if valid_email_domains.include?(email_domain)
     unless user
       User.create(first_name: first_name,
-                last_name: last_name,
-                email: email)
+                  last_name: last_name,
+                  email: email)
     end
   else
     terminate_sessions
