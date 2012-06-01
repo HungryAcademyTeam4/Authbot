@@ -2,7 +2,7 @@ ENV['GOOGLE_AUTH_URL'] = 'https://www.google.com/accounts/o8/id'
 
 require 'bundler'
 Bundler.require 
-
+set :session_secret 'HungryAcademy'
 ActiveRecord::Base.establish_connection(
   :adapter => "sqlite3",
   :database => "db/database.yml",
