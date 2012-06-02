@@ -1,4 +1,4 @@
 require 'bundler'
-Sinatra::Application.environment = :test
-Bundler.require :default, Sinatra::Application.environment
+Bundler.require [:default, :test], Sinatra::Application.environment
 
+Sinatra::Application.environment = :test
