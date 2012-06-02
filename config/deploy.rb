@@ -9,7 +9,7 @@ set :deploy_via, :remote_cache
 
 
 set :scm, "git"
-set :repository,  "git@github.com:HungryAcademyTeam4/Authbot.git"
+set :repository,  "git://github.com/HungryAcademyTeam4/Authbot.git"
 set :branch, "testdeploy"
 
 default_run_options[:pty] = true
