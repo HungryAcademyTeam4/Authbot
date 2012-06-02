@@ -20,6 +20,7 @@ get '/' do
   else
     terminate_sessions
   end
+  "Hello, I am #{user.email}."
 end
 
 def terminate_sessions

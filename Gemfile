@@ -7,7 +7,7 @@ gem 'rake'
 gem 'activerecord'
 gem 'sinatra-activerecord'
 gem 'sqlite3'
-
+gem 'thin'
 #group :test do
   gem 'capybara'
   gem "rack-test", require: 'rack/test'
