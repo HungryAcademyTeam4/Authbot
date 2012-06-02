@@ -1,10 +1,10 @@
 require 'bundler/capistrano'
 
-server "50.116.60.38", :web, :db, :app, primary: true
-set :user, "root"
+server "50.116.38.51", :web, :db, :app, primary: true
+set :user, "deployer"
 set :application, "Authbot"
 
-set :deploy_to, "/home/apps/#{application}"
+set :deploy_to, "/home/#{user}/apps/#{application}"
 set :deploy_via, :remote_cache
 
 
@@ -13,6 +13,7 @@ set :repository,  "git@github.com:HungryAcademyTeam4/Authbot.git"
 set :branch, "master"
 
 default_run_options[:pty] = true
+ssh_options[:forward_agent] = true
 
 namespace :deploy do
   desc "Start the Thin processes"
