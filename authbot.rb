@@ -1,30 +1,33 @@
-ENV['GOOGLE_AUTH_URL'] = 'https://www.google.com/accounts/o8/id'
+#ENV['GOOGLE_AUTH_URL'] = 'https://www.google.com/accounts/o8/id'
+require './setup'
 
-require 'bundler'
-Bundler.require 
-set :session_secret, 'HungryAcademy'
-ActiveRecord::Base.establish_connection(
-  :adapter => "sqlite3",
-  :database => "db/database.yml",
-)
-
-enable :sessions
-
-class User < ActiveRecord::Base
-  attr_accessible :first_name, :last_name, :email
+get "/current_user" do
+  if session["user_id"]
+    user = User.find(session["user_id"])
+    body "<ul><li id='email'>#{ user.email }</li></ul>"
+  else
+    terminate_sessions
+  end
 end
 
 get '/' do
-  authenticate
-  user_info  = JSON.parse(session["user_info"])
-  user       = User.find_by_email(user_info["email"])
-  email      = user_info["email"] 
-  first_name = user_info["first_name"] 
-  last_name  = user_info["last_name"] 
+  auth_data = Authenticator.auth || session["user_info"]
+  user_info  = JSON.parse(auth_data)
+  email      = user_info["email"]
 
-  unless user
-    User.create(first_name: first_name,
-                last_name: last_name,
-                email: email)
+  if valid_domain?(email)
+    session["user_id"] = User.id_for(user_info)
+  else
+    terminate_sessions
   end
+end
+
+def terminate_sessions
+  session["user_info"] = nil
+  session["user"] = nil
+  status 401
+end
+
+def valid_domain?(email)
+  VALID_DOMAINS.include?(email.split("@").last)
 end
