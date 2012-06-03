@@ -9,7 +9,7 @@ gem 'sqlite3'
 gem 'thin'
 gem 'unicorn'
 gem 'capistrano'
-#group :test do
+group :test do
   gem 'capybara'
   gem "rack-test", require: 'rack/test'
   gem 'sinatra-tests'
