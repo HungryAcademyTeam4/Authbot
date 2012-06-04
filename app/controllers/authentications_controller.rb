@@ -1,7 +1,6 @@
 class AuthenticationsController < ApplicationController
-  def show
-    omniauth = request.env["omniauth.auth"]
-    raise omniauth.inspect
-
+  def create
+    @omniauth = request.env["omniauth.auth"]
+    @omniauth.inspect
   end 
 end
