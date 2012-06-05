@@ -5,7 +5,13 @@ class AuthenticationsController < ApplicationController
     set_cookie(@user) if @user 
   end 
 
+  def destroy
+    cookies.delete("uid")
+  end
+
   def set_cookie(user)
     cookies["uid"] = user.uid
   end 
+
+
 end
