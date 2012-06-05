@@ -2,8 +2,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   def current_user 
-    if session["uid"]
-      user = User.find_by_uid(session["uid"])
+    if cookies["uid"]
+      user = User.find_by_uid(cookies["uid"])
     end 
     user
   end 

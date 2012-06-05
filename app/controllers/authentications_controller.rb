@@ -6,6 +6,6 @@ class AuthenticationsController < ApplicationController
   end 
 
   def set_cookie(user)
-    session["uid"] = user.uid
+    cookies["uid"] = user.uid
   end 
 end
