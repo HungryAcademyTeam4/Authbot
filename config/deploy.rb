@@ -7,7 +7,7 @@ set :application, "Authbot"
 
 set :deploy_to, "/home/#{user}/apps/#{application}"
 set :deploy_via, :remote_cache
-# set :use_sudo, true
+set :use_sudo, true
 
 # after "deploy:setup", "deploy:create_release_dir"
 # namespace :deploy do 
@@ -31,7 +31,7 @@ namespace :deploy do
   end
   task :start do
     bundle_install
-    run "cd /home/#{user}/apps/#{application}/current && bundle exec rake db:migrate"
+    run "cd /home/#{user}/apps/#{application}/current && bundle exec rake db:create && bundle exec rake db:migrate"
     run "cd /home/#{user}/apps/#{application}/current && bundle exec rails s -p 4568 -e production"
   end
 end
