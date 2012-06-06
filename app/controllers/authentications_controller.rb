@@ -3,7 +3,7 @@ class AuthenticationsController < ApplicationController
     @omniauth = request.env["omniauth.auth"]
     @user = User.find_or_create_by_auth(@omniauth)
     set_cookie(@user) if @user
-    return redirect_to '/'
+    return redirect_to '/', port: 80
   end 
 
   def destroy
