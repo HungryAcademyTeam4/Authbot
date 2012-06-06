@@ -9,7 +9,7 @@ class AuthenticationsController < ApplicationController
     @user = User.find_or_create_by_auth(@omniauth)
     set_cookie(@user) if @user
     #SHIPIT
-    return redirect_to root_path(port: 80)
+    return redirect_to root_url(port: 80, only_path: false)
   end 
 
   def destroy
