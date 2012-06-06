@@ -1,7 +1,11 @@
+PRODUCTION = "fallingfoundry.com"
+STAGING = "fallinggarden.com"
+SERVER = STAGING
+
 $:.unshift(File.expand_path('./lib', ENV['rvm_path']))
  require 'bundler/capistrano'
  require 'rvm/capistrano'
-server "fallinggarden.com", :web, :db, :app, primary: true
+server SERVER, :web, :db, :app, primary: true
 set :user, "deployer"
 set :application, "Authbot"
 
@@ -19,7 +23,6 @@ ssh_options[:forward_agent] = true
 
 
 namespace :deploy do
-  desc "Start the Thin processes"
   task :bundle_install do
     run "cd /home/#{user}/apps/#{application}/current && bundle install"
   end
@@ -34,9 +37,10 @@ namespace :deploy do
     CMD
   end
   task :start do
-    bundle_install
-    create_release_log
+    #bundle_install
     run "cd /home/#{user}/apps/#{application}/current && bundle exec rake db:create && bundle exec rake db:migrate"
-    run "cd /home/#{user}/apps/#{application}/current && bundle exec rails s -p 4568 -e production"
+    run "cd /home/#{user}/apps/#{application}/current && bundle exec puma -p 4568 -e production &"
   end
+  after "deploy", "deploy:create_release_log"
+  after "deploy", "deploy:start"
 end

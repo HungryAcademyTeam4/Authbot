@@ -17,6 +17,7 @@ end
 group :production do 
   gem 'passenger'
   gem 'mysql2'
+  gem 'puma'
 end 
 
 # Gems used only for assets and not required
