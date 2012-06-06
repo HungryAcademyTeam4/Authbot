@@ -39,7 +39,6 @@ namespace :deploy do
     CMD
   end
   task :start do
-    #bundle_install
     run "cd /home/#{user}/apps/#{application}/current && RAILS_ENV=production bundle exec rake db:create && bundle exec rake db:migrate"
     run "cd /home/#{user}/apps/#{application}/current && RAILS_ENV=production bundle exec puma -p 4568"
   end
