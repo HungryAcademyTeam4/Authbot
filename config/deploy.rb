@@ -1,6 +1,8 @@
-PRODUCTION = "fallingfoundry.com"
-STAGING = "fallinggarden.com"
-SERVER = STAGING
+MODE = "staging"
+PRODUCTION_SERVER = "fallingfoundry.com"
+STAGING_SERVER = "fallinggarden.com"
+SERVER = MODE == "production" ? PRODUCTION_SERVER : STAGING_SERVER
+
 
 $:.unshift(File.expand_path('./lib', ENV['rvm_path']))
  require 'bundler/capistrano'
@@ -38,8 +40,8 @@ namespace :deploy do
   end
   task :start do
     #bundle_install
-    run "cd /home/#{user}/apps/#{application}/current && bundle exec rake db:create && bundle exec rake db:migrate"
-    run "cd /home/#{user}/apps/#{application}/current && bundle exec puma -p 4568 -e production &"
+    run "cd /home/#{user}/apps/#{application}/current && RAILS_ENV=production bundle exec rake db:create && bundle exec rake db:migrate"
+    run "cd /home/#{user}/apps/#{application}/current && RAILS_ENV=production bundle exec puma -p 4568"
   end
   after "deploy", "deploy:create_release_log"
   after "deploy", "deploy:start"
