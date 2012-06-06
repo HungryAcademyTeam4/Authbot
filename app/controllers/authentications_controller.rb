@@ -1,10 +1,15 @@
 class AuthenticationsController < ApplicationController
+  def index
+    #test line
+    redirect_to "www.cnn.com"
+  end
+
   def create
     @omniauth = request.env["omniauth.auth"]
     @user = User.find_or_create_by_auth(@omniauth)
     set_cookie(@user) if @user
     #SHIPIT
-    return redirect_to("http://fallinggarden.com:80")
+    return redirect_to root_path(port: 80)
   end 
 
   def destroy
@@ -14,6 +19,4 @@ class AuthenticationsController < ApplicationController
   def set_cookie(user)
     cookies["uid"] = user.uid
   end 
-
-
 end
