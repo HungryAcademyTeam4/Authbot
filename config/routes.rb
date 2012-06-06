@@ -1,7 +1,6 @@
 Authbot::Application.routes.draw do
 
   resources :authentications 
-
   match '/auth/:provider/callback', :to => "authentications#create"
   match 'logout', to: 'authentications#destroy', as: "destroy_authentication"
 
