@@ -41,7 +41,7 @@ namespace :deploy do
   task :start do
     run "cd /home/#{user}/apps/#{application}/current && RAILS_ENV=production bundle install"
     run "cd /home/#{user}/apps/#{application}/current && RAILS_ENV=production bundle exec rake db:create && bundle exec rake db:migrate"
-    run "cd /home/#{user}/apps/#{application}/current && RAILS_ENV=production bundle exec unicorn -p 4568 -d"
+    run "cd /home/#{user}/apps/#{application}/current && RAILS_ENV=production bundle exec unicorn -p 4568 -D"
   end
   after "deploy", "deploy:create_release_log"
   after "deploy", "deploy:start"

@@ -15,7 +15,6 @@ group :development do
 end 
 
 group :production do 
-  gem 'passenger'
   gem 'mysql2'
   gem 'unicorn'
 end 
