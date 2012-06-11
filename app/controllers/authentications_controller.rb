@@ -17,5 +17,6 @@ class AuthenticationsController < ApplicationController
 
   def set_cookie(user)
     cookies["uid"] = user.uid
+    cookies["user_name"] = user.first_name + " " + user.last_name
   end 
 end
