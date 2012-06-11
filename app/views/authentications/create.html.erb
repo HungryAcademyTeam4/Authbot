@@ -1,4 +1,5 @@
     <%= current_user.inspect %> <br /><hr> 
     <%= cookies.inspect %> <br /><hr> 
     <%= @user.inspect %> <br /><hr> 
-    <%= link_to "Destroy Forever", destroy_authentication_path, :method => :delete %>
+    <%= link_to "Destroy Login", destroy_authentication_path, :method => :delete %>
+    <%= link_to "Exit debut mode", "http://localhost:3001/" %>
