@@ -13,6 +13,8 @@ class AuthenticationsController < ApplicationController
 
   def destroy
     cookies.delete("uid")
+    cookies.delete("user_name")
+    return redirect_to root_url(port: 80, only_path: false)
   end
 
   def set_cookie(user)
