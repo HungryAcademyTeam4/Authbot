@@ -6,7 +6,7 @@ class AuthenticationsController < ApplicationController
 
   def create
     @omniauth = request.env["omniauth.auth"]
-    @user = User.find_or_create_by_auth(@omniauth)
+    @user = User.find_or_create_by_auth(@omniauth) if @omniauth
     set_cookie(@user) if @user
     return redirect_to root_url(port: 80, only_path: false)
   end 
